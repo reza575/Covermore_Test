@@ -2,6 +2,9 @@ package com.moeiny.reza.covermore_test.core.di
 
 import android.app.Application
 import android.content.Context
+import com.moeiny.reza.covermore_test.data.newsrepository.NewsRepository
+import com.moeiny.reza.covermore_test.data.newsrepository.NewsRepositoryDefault
+import com.moeiny.reza.covermore_test.data.retrofit.ApiService
 
 import dagger.Module
 import dagger.Provides
@@ -15,6 +18,13 @@ class ApplicationModule(private val application: Application) {
     @Provides
     fun provideContext(): Context = application
 
+    @Singleton
+    @Provides
+    fun provideNewsRepository(newsRepository: NewsRepositoryDefault): NewsRepository = newsRepository
+
+    @Singleton
+    @Provides
+    fun provideApiService(retrofit:Retrofit): ApiService = retrofit.create(ApiService::class.java)
 
 
     @Singleton
