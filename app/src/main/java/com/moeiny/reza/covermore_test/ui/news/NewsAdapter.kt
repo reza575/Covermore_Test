@@ -81,18 +81,20 @@ class NewsAdapter(private val onCardClicked: (news: ShowNewsModel) -> Unit) :
     override fun onBindViewHolder(holderNews: NewsViewHolder, position: Int) {
         var info = newsList.get(position)
 
-        when (holderNews.getItemViewType()) {
-             CELL_TYPE_HEADER -> {
-                 holderNews.headerBinding?.cardPhotorowParent?.setOnClickListener {
-                     onCardClicked(info!!)
-                 }
-             }
-            CELL_TYPE_REGULAR_ITEM -> {
-                holderNews.regularItemBinding?.cardPhotorowParent?.setOnClickListener {
-                    onCardClicked(info!!)
-                }
-            }
-        }
+       if (info!=null) {
+           when (holderNews.getItemViewType()) {
+               CELL_TYPE_HEADER -> {
+                   holderNews.headerBinding?.cardPhotorowParent?.setOnClickListener {
+                       onCardClicked(info)
+                   }
+               }
+               CELL_TYPE_REGULAR_ITEM -> {
+                   holderNews.regularItemBinding?.cardPhotorowParent?.setOnClickListener {
+                       onCardClicked(info)
+                   }
+               }
+           }
+       }
         holderNews.bind(info)
     }
 
